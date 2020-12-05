@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OrganizeIt</string>
+    <string name="string_campo_correo">Correo Electronico   (ejemplo@dominio.com)</string>
+    <string name="string_campo_contrasena">Contraseña</string>
+    <string name="string_Registrate_Login">No tienes cuenta, Registrate!</string>
+    <string name="usermessage_noemail">No ingreso un correo.</string>
+    <string name="usermessage_noemailformat">No ingreso un correo valido.</string>
+    <string name="usermessage_nopassword">No ingreso Contraseña.</string>
+</resources>
