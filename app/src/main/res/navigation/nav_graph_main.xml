@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/fragment_cat">
+
+    <fragment
+        android:id="@+id/fragment_cat"
+        android:name="com.example.organizeit.fragment_categories"
+        android:label="Categorías"
+        tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/fragment_list"
+        android:name="com.example.organizeit.fragment_list"
+        android:label="Listas"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/fragment_notes"
+        android:name="com.example.organizeit.fragment_notes"
+        android:label="notas"
+        tools:layout="@layout/fragment_notes" />
+    <fragment
+        android:id="@+id/fragment_homework"
+        android:name="com.example.organizeit.fragment_homework"
+        android:label="Tareas"
+        tools:layout="@layout/fragment_homework" />
+    <fragment
+        android:id="@+id/fragment_calendar"
+        android:name="com.example.organizeit.fragment_calendar"
+        android:label="Calendario"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/fragment_options"
+        android:name="com.example.organizeit.fragment_options"
+        android:label="Opciones"
+        tools:layout="@layout/fragment_options" />
+</navigation>
