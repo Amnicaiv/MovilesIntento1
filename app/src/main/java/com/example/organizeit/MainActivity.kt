@@ -26,9 +26,6 @@ class MainActivity : AppCompatActivity() {
             val registerActivity = Intent(applicationContext, RegisterActivity::class.java)
             startActivity(registerActivity)
         }
-     /*   this.lbl_Registrarse.setOnClickListener(){
-
-        }*/
     }
 
 
