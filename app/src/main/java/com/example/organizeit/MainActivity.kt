@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.util.Patterns
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
@@ -37,8 +38,8 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onTick(millisUntilFinished: Long) {
                     if (userFunc.getisLogged()){
-                        val dummyActivity = Intent(applicationContext, dummy::class.java)
-                        startActivity(dummyActivity)
+                        val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+                        startActivity(menuActivity)
                         userFunc.resetisLogged()
                     }
                 }
@@ -79,10 +80,5 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Correo o contraseña incorrecta.", Toast.LENGTH_SHORT).show()
         return false
     }
-
-
-
-
-
 
 }

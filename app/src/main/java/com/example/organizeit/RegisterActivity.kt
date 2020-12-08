@@ -8,22 +8,7 @@ import android.os.CountDownTimer
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.contentValuesOf
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
-import org.json.JSONObject
-import org.json.JSONException
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
-
 
 
 
@@ -71,8 +56,8 @@ class RegisterActivity : AppCompatActivity(){
                             val ID= dbManager.Insert(values)
 
                             if(ID >0){
-                                val dummyActivity = Intent(applicationContext, dummy::class.java)
-                                startActivity(dummyActivity)
+                                val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+                                startActivity(menuActivity)
                             }else{
                                 Toast.makeText(applicationContext, "No se pudo agregar el usuario", Toast.LENGTH_SHORT).show()
                             }
