@@ -3,23 +3,47 @@ package com.example.organizeit
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Patterns
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var userFunc = UsuarioFunciones()
+
         this.button.setOnClickListener(){
+
+            userFunc.resetisLogged()
             val email = this.editTextTextEmailAddress3.text.toString()
             val password = this.editTextTextPassword.text.toString()
 
             if(validateLogin(email,password)){
-                val dummyActivity = Intent(applicationContext, dummy::class.java)
-                startActivity(dummyActivity)
+                /*val dummyActivity = Intent(applicationContext, dummy::class.java)
+                startActivity(dummyActivity)*/
+                userFunc.tryLogin(email, password, this)
+
             }
+
+
+            val timer = object: CountDownTimer(3000, 1000) {
+                override fun onFinish() {
+                    userFunc.resetisLogged()
+                }
+
+                override fun onTick(millisUntilFinished: Long) {
+                    if (userFunc.getisLogged()){
+                        val dummyActivity = Intent(applicationContext, dummy::class.java)
+                        startActivity(dummyActivity)
+                        userFunc.resetisLogged()
+                    }
+                }
+            }
+            timer.start()
         }
 
         this.textView2.setOnClickListener(){
@@ -55,6 +79,10 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Correo o contraseña incorrecta.", Toast.LENGTH_SHORT).show()
         return false
     }
+
+
+
+
 
 
 }
