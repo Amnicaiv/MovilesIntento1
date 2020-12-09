@@ -53,6 +53,7 @@ class RegisterActivity : AppCompatActivity(){
                             values.put("Correo", correoInput)
                             values.put("Contra", contraInput)
 
+                            dbManager.CleanUserTable()
                             val ID= dbManager.Insert(values)
 
                             if(ID >0){

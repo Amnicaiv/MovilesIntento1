@@ -15,6 +15,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val dbMan = DBManager(this)
+
+        if(dbMan.CheckLoggedUser()){
+            //Toast.makeText(this, "Alguien ya esta logeado", Toast.LENGTH_SHORT).show()
+            val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+            startActivity(menuActivity)
+        }
+
         var userFunc = UsuarioFunciones()
 
         this.button.setOnClickListener(){
@@ -26,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             if(validateLogin(email,password)){
                 /*val dummyActivity = Intent(applicationContext, dummy::class.java)
                 startActivity(dummyActivity)*/
-                userFunc.tryLogin(email, password, this)
+                userFunc.tryLogin(email, password, this, applicationContext)
 
             }
 

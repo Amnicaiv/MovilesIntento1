@@ -2,6 +2,7 @@ package com.example.organizeit
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
@@ -33,7 +34,6 @@ class DBManager {
             this.context = context
         }
         override fun onCreate(p0: SQLiteDatabase?) {
-           p0!!.execSQL(sqlCreateTable)
             Toast.makeText(this.context, "database created", Toast.LENGTH_SHORT).show()
         }
 
@@ -43,9 +43,24 @@ class DBManager {
     }
 
     fun Insert(values:ContentValues): Long {
+        sqlDB!!.execSQL("DELETE FROM Users;")
         val ID= sqlDB!!.insert(dbTable, "",values)
         return ID
     }
+
+    fun CheckLoggedUser(): Boolean {
+        val selectQuery = "SELECT * FROM Users;"
+        val ID = sqlDB!!.rawQuery(selectQuery,null)
+        if (ID != null){
+            return true
+        }
+        return false
+    }
+
+    fun CleanUserTable(){
+        sqlDB!!.execSQL("DELETE FROM Users;")
+    }
+
 
 
 }

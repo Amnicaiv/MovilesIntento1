@@ -1,5 +1,6 @@
 package com.example.organizeit
 
+import android.content.ContentValues
 import android.content.Context
 import android.widget.Toast
 import com.android.volley.Request
@@ -16,7 +17,8 @@ class UsuarioFunciones {
     fun tryLogin(
         email: String,
         password: String,
-        currentContext: Context
+        currentContext: Context,
+        appContext : Context
     ){
         val queue = Volley.newRequestQueue(currentContext)
 
@@ -37,8 +39,36 @@ class UsuarioFunciones {
                     isLogged =false
                     Toast.makeText(currentContext, result, Toast.LENGTH_SHORT).show()
                 }else{
-                    this.isLogged =true
-                    Toast.makeText(currentContext, "Bienvenido.", Toast.LENGTH_SHORT).show()
+
+                    val mStrings = result.split("/").toTypedArray()
+
+
+
+                    val userID = mStrings[0]
+                    val nombreIBD= mStrings[1]
+                    val apellidosIBD= mStrings[2]
+                    val correoIBD= mStrings[3]
+                    val contraIBD=mStrings[4]
+                    val fotoIBD=""
+                    Toast.makeText(currentContext, userID, Toast.LENGTH_SHORT).show()
+
+                    var dbManager = DBManager(appContext)
+
+                    var values = ContentValues()
+
+                    values.put("Nombre", nombreIBD)
+                    values.put("Apellidos", apellidosIBD)
+                    values.put("Correo", correoIBD)
+                    values.put("Contra", contraIBD)
+
+                    dbManager.CleanUserTable()
+                    val ID= dbManager.Insert(values)
+                    if (ID >0){
+                        this.isLogged =true
+                        Toast.makeText(currentContext, "Bienvenido.", Toast.LENGTH_SHORT).show()
+                    }
+
+
                 }
 
             },
