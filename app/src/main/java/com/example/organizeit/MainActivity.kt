@@ -17,10 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         val dbMan = DBManager(this)
 
-        if(dbMan.CheckLoggedUser()){
-            Toast.makeText(this, "Alguien ya esta logeado", Toast.LENGTH_SHORT).show()
-//            val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
-//            startActivity(menuActivity)
+        if(dbMan.GetUserId() != "No se encontro"){
+            //Toast.makeText(this, dbMan.GetUserId().toString(), Toast.LENGTH_SHORT).show()
+            val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+            startActivity(menuActivity)
         }
 
         var userFunc = UsuarioFunciones()

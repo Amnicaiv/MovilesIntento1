@@ -84,6 +84,15 @@ class DBManager(context: Context) {
         sqlDB!!.update("categorias", cv, "nombre = ?", arrayOf(name))
     }
 
+    fun getUserCat(userID: String): String? {
+        val ID = sqlDB!!.rawQuery("SELECT nombre FROM categorias WHERE idUsuario = $userID",null)
+        if(ID.moveToFirst()){
+            val str = ID.getString(ID.getColumnIndex("nombre"))
+            return str
+        }
+        return "No se encontro"
+    }
+
 
 
 }
