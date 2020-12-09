@@ -66,7 +66,7 @@ class UsuarioFunciones {
 
                     dbManager.CleanUserTable()
                     val ID= dbManager.Insert(values)
-                    if (ID >0){
+                    if (ID > 0){
                         this.isLogged =true
                         Toast.makeText(currentContext, "Bienvenido.", Toast.LENGTH_SHORT).show()
                     }

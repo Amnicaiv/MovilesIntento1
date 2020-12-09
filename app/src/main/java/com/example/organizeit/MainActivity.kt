@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
         val dbMan = DBManager(this)
 
         if(dbMan.CheckLoggedUser()){
-            //Toast.makeText(this, "Alguien ya esta logeado", Toast.LENGTH_SHORT).show()
-            val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
-            startActivity(menuActivity)
+            Toast.makeText(this, "Alguien ya esta logeado", Toast.LENGTH_SHORT).show()
+//            val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+//            startActivity(menuActivity)
         }
 
         var userFunc = UsuarioFunciones()
