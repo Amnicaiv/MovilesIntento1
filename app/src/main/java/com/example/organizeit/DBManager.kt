@@ -5,27 +5,31 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.Toast
 
-class DBManager {
+class DBManager(context: Context) {
 
     val dbName = "MI_OrganizeIt"
     val dbTable= "Users"
-    val colId = "ID"
-    val colName ="Nombre"
-    val colLastNames = "Apellidos"
-    val colCorreo = "Correo"
-    val colContra = "Contra"
+    private val colId = "ID"
+    private val colName ="Nombre"
+    private val colLastNames = "Apellidos"
+    private val colCorreo = "Correo"
+    private val colContra = "Contra"
     val dbVersion =1
     val sqlCreateTable ="CREATE TABLE IF NOT EXISTS " + dbTable +" ("+ colId +" INTEGER PRIMARY KEY," +
             colName + " TEXT, "+ colLastNames +" TEXT, "+ colCorreo + " TEXT, " + colContra + " TEXT);"
 
+
+    val sqlCreateTableCat ="CREATE TABLE IF NOT EXISTS " + "categorias" + " (ID INTEGER PRIMARY KEY, nombre TEXT, descripcion TEXT, color TEXT, borrador BOOL, idUsuario INTEGER);"
+
     var sqlDB:SQLiteDatabase?=null
 
 
-    constructor(context: Context){
+    init {
         val db= DatabaseHelperNotes(context)
         sqlDB = db.writableDatabase
+        sqlDB!!.execSQL(sqlCreateTable)
+        sqlDB!!.execSQL(sqlCreateTableCat)
     }
 
     inner class DatabaseHelperNotes:SQLiteOpenHelper{
@@ -34,7 +38,8 @@ class DBManager {
             this.context = context
         }
         override fun onCreate(p0: SQLiteDatabase?) {
-            Toast.makeText(this.context, "database created", Toast.LENGTH_SHORT).show()
+            p0!!.execSQL(sqlCreateTable)
+            p0!!.execSQL(sqlCreateTableCat)
         }
 
         override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -57,8 +62,26 @@ class DBManager {
         return false
     }
 
+    fun GetUserId(): String? {
+        val ID = sqlDB!!.rawQuery("SELECT ID FROM Users",null)
+        if(ID.moveToFirst()){
+            val str = ID.getString(ID.getColumnIndex("ID"))
+            return str
+        }
+        return "No se encontro"
+    }
+
     fun CleanUserTable(){
         sqlDB!!.execSQL("DELETE FROM Users;")
+    }
+
+    fun InsertCat(values:ContentValues):Long{
+        val ID= sqlDB!!.insert("categorias", "",values)
+        return ID
+    }
+
+    fun UpdateCatStatus(name:String, author:String, status:String, cv:ContentValues){
+        sqlDB!!.update("categorias", cv, "nombre = ?", arrayOf(name))
     }
 
 

@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
         val dbMan = DBManager(this)
 
         if(dbMan.CheckLoggedUser()){
-            //Toast.makeText(this, "Alguien ya esta logeado", Toast.LENGTH_SHORT).show()
-            val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
-            startActivity(menuActivity)
+            Toast.makeText(this, "Alguien ya esta logeado", Toast.LENGTH_SHORT).show()
+//            val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+//            startActivity(menuActivity)
         }
 
         var userFunc = UsuarioFunciones()
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onTick(millisUntilFinished: Long) {
                     if (userFunc.getisLogged()){
-                        val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+                        val menuActivity = Intent(applicationContext, dummy::class.java)
                         startActivity(menuActivity)
                         userFunc.resetisLogged()
                     }
