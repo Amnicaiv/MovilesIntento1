@@ -14,6 +14,8 @@ class UsuarioFunciones {
     private var isLogged =false
     private var isRegistered =false
 
+
+
     fun tryLogin(
         email: String,
         password: String,
@@ -56,6 +58,7 @@ class UsuarioFunciones {
 
                     var values = ContentValues()
 
+                    values.put("ID", userID)
                     values.put("Nombre", nombreIBD)
                     values.put("Apellidos", apellidosIBD)
                     values.put("Correo", correoIBD)
@@ -109,6 +112,12 @@ class UsuarioFunciones {
         queue.add(stringRequest)
 
 
+    }
+
+    fun getUserID(context: Context): String? {
+        val dbManager = DBManager(context)
+        val userID = dbManager.GetUserId()
+        return userID
     }
 
     fun getisLogged(): Boolean {

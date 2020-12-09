@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onTick(millisUntilFinished: Long) {
                     if (userFunc.getisLogged()){
-                        val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
+                        val menuActivity = Intent(applicationContext, dummy::class.java)
                         startActivity(menuActivity)
                         userFunc.resetisLogged()
                     }
