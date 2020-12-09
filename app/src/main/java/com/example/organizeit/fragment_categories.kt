@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_categories.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,11 +26,23 @@ class fragment_categories : Fragment() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
+            val categoria= Categorias(nombre = "Familia", items = "0 / 6", imagen =  R.drawable.edit)
+            val categoria2= Categorias(nombre = "Trabajo", items = "4 / 5", imagen =  R.drawable.edit)
+            val categoria3= Categorias(nombre = "Amigos", items = "2 / 2", imagen =  R.drawable.edit)
+
+            val listaCategorias = listOf(categoria, categoria2, categoria3)
+
+            val adapter = CategoriasAdapter(mContext = requireContext(), listaCategorias = listaCategorias)
+            lvCategories.adapter = adapter;
+
+
         }
 
     }
@@ -64,6 +78,8 @@ class fragment_categories : Fragment() {
             }
 
     }
+
+
 
 
 }

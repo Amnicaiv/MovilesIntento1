@@ -8,6 +8,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import kotlinx.android.synthetic.main.activity_categories.*
 
+
 class CategoriesActivity : AppCompatActivity() {
 
     private lateinit var navContrtroler: NavController
@@ -23,6 +24,8 @@ class CategoriesActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(navigation_view, navContrtroler)
         NavigationUI.setupActionBarWithNavController(this, navContrtroler, prueba_layout)
 
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -31,5 +34,6 @@ class CategoriesActivity : AppCompatActivity() {
             prueba_layout
         )
     }
+
 
 }
