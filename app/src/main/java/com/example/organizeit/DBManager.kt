@@ -2,7 +2,6 @@ package com.example.organizeit
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -84,13 +83,15 @@ class DBManager(context: Context) {
         sqlDB!!.update("categorias", cv, "nombre = ?", arrayOf(name))
     }
 
-    fun getUserCat(userID: String): String? {
+    fun getUserCat(userID: String): ArrayList<String> {
         val ID = sqlDB!!.rawQuery("SELECT nombre FROM categorias WHERE idUsuario = $userID",null)
+        val list = ArrayList<String>()
         if(ID.moveToFirst()){
-            val str = ID.getString(ID.getColumnIndex("nombre"))
-            return str
+            do {
+                list.add(ID.getString(ID.getColumnIndexOrThrow("nombre")))
+            } while (ID.moveToNext())
         }
-        return "No se encontro"
+        return list
     }
 
 

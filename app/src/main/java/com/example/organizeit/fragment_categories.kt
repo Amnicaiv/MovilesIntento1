@@ -67,13 +67,21 @@ class fragment_categories : Fragment() {
         val categoria3= Categorias(nombre = "Amigos", items = "2 / 2", imagen =  R.drawable.edit)
 
         val dbMan = DBManager(requireContext())
+        val list = ArrayList<Categorias>()
 
-        //dbMan.getUserCat()
+        val categoriesStr = dbMan.getUserCat(dbMan.GetUserId().toString())
+        for (cat in categoriesStr) {
+            list.add(Categorias(nombre = cat, items = "0 / 6", imagen =  R.drawable.edit))
+            Toast.makeText(requireContext(), cat, Toast.LENGTH_SHORT).show()
+        }
+
+
+
 
         val listaCategorias = listOf(categoria, categoria2, categoria3)
         val listViewTest = this.lvCategories as ListView
 
-        val adapter = CategoriasAdapter(requireContext(),listaCategorias)
+        val adapter = CategoriasAdapter(requireContext(),list)
 
         listViewTest.adapter = adapter
     }
