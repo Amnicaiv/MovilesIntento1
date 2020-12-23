@@ -1,16 +1,17 @@
 package com.example.organizeit
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
-import kotlin.concurrent.timer
+import kotlinx.android.synthetic.main.activity_register.*
+
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onTick(millisUntilFinished: Long) {
                     if (userFunc.getisLogged()){
-                        val menuActivity = Intent(applicationContext, dummy::class.java)
+                        val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
                         startActivity(menuActivity)
                         userFunc.resetisLogged()
                     }
@@ -59,13 +60,15 @@ class MainActivity : AppCompatActivity() {
             val registerActivity = Intent(applicationContext, RegisterActivity::class.java)
             startActivity(registerActivity)
         }
+
     }
 
 
 
     fun validateLogin(emailP: String, passwordP: String): Boolean {
 
-        val isEmailInFormat = Patterns.EMAIL_ADDRESS.matcher(emailP).matches();
+        val isEmailInFormat = Patterns.EMAIL_ADDRESS.matcher(emailP).matches()
+
         if ( (emailP.isNotEmpty() && isEmailInFormat) && (passwordP.isNotEmpty()) ){
 
             return true

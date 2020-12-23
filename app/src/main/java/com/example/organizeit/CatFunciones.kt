@@ -37,7 +37,8 @@ class CatFunciones {
                 if(result =="No se pudo agregar la Categoria."){
                     isUploaded =false
                     Toast.makeText(currentContext, result, Toast.LENGTH_SHORT).show()
-                }else{
+                }
+                else{
                     Toast.makeText(currentContext, "La categoria se guardo en la nube", Toast.LENGTH_SHORT).show()
                     val dbMan = DBManager(currentContext)
                     val contentValues = ContentValues()

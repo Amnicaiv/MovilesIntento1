@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.main.dummypage.*
 class dummy : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dummypage)
+        setContentView(R.layout.activity_create_categories)
 
-        val dbMan = DBManager(this)
+      /*  val dbMan = DBManager(this)
 
         val userFunc = UsuarioFunciones()
         val catFunciones = CatFunciones()
@@ -32,7 +32,7 @@ class dummy : AppCompatActivity() {
 
             val ID= dbMan.InsertCat(values)
             if (ID >0){
-                Toast.makeText(this, "Se creo la categoria $catName.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Se creo la categoria $catAuthor.", Toast.LENGTH_SHORT).show()
                 catFunciones.tryUpload(catName.toString(),catDesc.toString(),catColor.toString(),catAuthor.toString(),this,applicationContext)
             }
 
@@ -42,6 +42,6 @@ class dummy : AppCompatActivity() {
 
 
 
-        }
+        }*/
     }
 }

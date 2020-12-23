@@ -1,15 +1,14 @@
 package com.example.organizeit
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_categories.*
 
@@ -23,7 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [BlankFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class fragment_categories : Fragment() {
+class fragment_categories : Fragment() , View.OnClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -48,6 +47,8 @@ class fragment_categories : Fragment() {
 
         }
 
+
+
     }
 
     override fun onCreateView(
@@ -55,7 +56,15 @@ class fragment_categories : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories, container, false)
+        val myView = inflater.inflate(R.layout.fragment_categories, container, false)
+        val addCatBTN = myView?.findViewById<View>(R.id.buttonAgregar)
+        if (addCatBTN != null) {
+            Toast.makeText(requireContext(), "Button found", Toast.LENGTH_SHORT).show()
+            addCatBTN.setOnClickListener(this)
+        }else{
+            Toast.makeText(requireContext(), "Button not found", Toast.LENGTH_SHORT).show()
+        }
+        return myView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,7 +81,6 @@ class fragment_categories : Fragment() {
         val categoriesStr = dbMan.getUserCat(dbMan.GetUserId().toString())
         for (cat in categoriesStr) {
             list.add(Categorias(nombre = cat, items = "0 / 6", imagen =  R.drawable.edit))
-            Toast.makeText(requireContext(), cat, Toast.LENGTH_SHORT).show()
         }
 
 
@@ -108,7 +116,10 @@ class fragment_categories : Fragment() {
 
     }
 
-
+    override fun onClick(p0: View?) {
+        val menuActivity = Intent(requireContext(), Activity_CreateCategory::class.java)
+        startActivity(menuActivity)
+    }
 
 
 }

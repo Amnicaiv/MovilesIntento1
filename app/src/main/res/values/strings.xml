@@ -6,7 +6,6 @@
     <string name="usermessage_noemail">No ingreso un correo.</string>
     <string name="usermessage_noemailformat">No ingreso un correo valido.</string>
     <string name="usermessage_nopassword">No ingreso Contraseña.</string>
-
-    String urlString
+    <string name="appDomain">https://cubedout.000webhostapp.com/</string>
 
 </resources>
