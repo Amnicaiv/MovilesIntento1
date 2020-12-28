@@ -14,9 +14,10 @@ class DBManager(context: Context) {
     private val colLastNames = "Apellidos"
     private val colCorreo = "Correo"
     private val colContra = "Contra"
-    val dbVersion =1
+    private val colImg = "Imagen"
+    val dbVersion =3
     val sqlCreateTable ="CREATE TABLE IF NOT EXISTS " + dbTable +" ("+ colId +" INTEGER PRIMARY KEY," +
-            colName + " TEXT, "+ colLastNames +" TEXT, "+ colCorreo + " TEXT, " + colContra + " TEXT);"
+            colName + " TEXT, "+ colLastNames +" TEXT, "+ colCorreo + " TEXT, " + colContra + " TEXT," + colImg + " BLOB);"
 
 
     val sqlCreateTableCat ="CREATE TABLE IF NOT EXISTS " + "categorias" + " (ID INTEGER PRIMARY KEY, nombre TEXT, descripcion TEXT, color TEXT, borrador BOOL, idUsuario INTEGER);"
@@ -92,6 +93,18 @@ class DBManager(context: Context) {
             } while (ID.moveToNext())
         }
         return list
+    }
+
+    fun getUserData(idUser:String): Usuario {
+        val cursor = sqlDB!!.rawQuery("SELECT * FROM Users WHERE $colId = $idUser",null)
+        if(cursor.moveToFirst()){
+
+            var user = Usuario(cursor.getString(cursor.getColumnIndex("Nombre")),cursor.getString(cursor.getColumnIndex("Apellidos")),cursor.getString(cursor.getColumnIndex("Correo")),cursor.getString(cursor.getColumnIndex("Contra")), cursor.getString(cursor.getColumnIndex("Imagen")))
+            return user
+        }
+
+        var user = Usuario("Vacio","Vacio","Vacio","Vacio","Vacio")
+        return user
     }
 
 

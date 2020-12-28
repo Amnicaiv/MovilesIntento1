@@ -1,9 +1,9 @@
 package com.example.organizeit
 
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity(){
 
         imageView = this.imageView3
 
-        this.button2.setOnClickListener(){
+        this.GuardarModifUsu_BTN.setOnClickListener(){
 
             val nombreInput = this.edit_Nombre_Registro.text.toString()
             val apellidosInput = this.edit_Apellidos_Registro.text.toString()
@@ -41,13 +41,20 @@ class RegisterActivity : AppCompatActivity(){
 
             if(validateForm()){
 
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos) // bm is the bitmap object
-                val b: ByteArray = baos.toByteArray()
-                val encodedImage: String = Base64.encodeToString(b, Base64.DEFAULT)
+                val outputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+
+                var encodedString = Base64.encodeToString(
+                    outputStream.toByteArray(),
+                    Base64.DEFAULT
+                )
+
+                var newText = encodedString.replace(' ', '-')
+                newText = newText.replace('\t', '-')
+                newText = newText.replace('\n', '-')
 
 
-                userfunc.tryRegistry(nombreInput, apellidosInput, correoInput, contraInput, encodedImage, this, applicationContext)
+                userfunc.tryRegistry(nombreInput, apellidosInput, correoInput, contraInput, newText, this, applicationContext)
 
 
 
@@ -61,30 +68,10 @@ class RegisterActivity : AppCompatActivity(){
 
                         if(userfunc.getisLogged() && userfunc.getisRegistered()){
 
-                         /*   userfunc.resetisLogged()
-                            userfunc.resetisRegistered()
-
-                            var dbManager = DBManager(applicationContext)
-                            var values = ContentValues()
-
-                            values.put("Nombre", nombreInput)
-                            values.put("Apellidos", apellidosInput)
-                            values.put("Correo", correoInput)
-                            values.put("Contra", contraInput)
-
-                            dbManager.CleanUserTable()
-                            val ID= dbManager.Insert(values)
-
-                            if(ID >0){
-                                val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
-                                startActivity(menuActivity)
-                                finish()
-                            }else{
-                                Toast.makeText(applicationContext, "No se pudo agregar el usuario", Toast.LENGTH_SHORT).show()
-                            }*/
-
                             val menuActivity = Intent(applicationContext, CategoriesActivity::class.java)
                             startActivity(menuActivity)
+                            userfunc.resetisRegistered()
+                            userfunc.resetisLogged()
                             finish()
                         }
                     }
